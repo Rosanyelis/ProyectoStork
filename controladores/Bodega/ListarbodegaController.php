@@ -1,5 +1,5 @@
 <?php
-# Realizo la llamada del modelo de la bodega para instaciar la funcion 
+# Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
 require_once("../../modelos/BodegaModel.php");
 

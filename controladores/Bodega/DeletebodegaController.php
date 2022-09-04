@@ -4,7 +4,7 @@ require_once("../../modelos/BodegaModel.php");
 
 # Eliminamos los espacios del principio y final del dato
 $id   = trim($_REQUEST['id']);
-
+# Instancio la funcion de eliminar registro
 $instancia = new Bodega();
 $result = $instancia->delete($id);
 

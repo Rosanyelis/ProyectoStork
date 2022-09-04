@@ -17,10 +17,10 @@ $preciocomprat      = trim($_REQUEST['preciocompra_total']);
 $preciovalorp       = trim($_REQUEST['preciovalor_p']);
 $preciocostor       = trim($_REQUEST['preciocosto_r']);
 
-# Instaciamos la funcion de la clase campos para insertar datos
+# Instaciamos la funcion de la clase campos para actualizar datos
 $instacia = new Bodega();
 $result = $instacia->update($id, $codigoProducto, $descripcion, $medida, $stock, $Familia, $SubFamilia, $Tipo, $preciocomprau, $preciocomprat, $preciovalorp, $preciocostor);
-
+# valida el proceso de actualizacion 
 if ($result == 1) {
     echo 
     "<script> 

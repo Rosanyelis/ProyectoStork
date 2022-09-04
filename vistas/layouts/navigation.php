@@ -94,13 +94,13 @@
                             </a>
                         </li>
                         <li data-menu="">
-                            <a class="dropdown-item d-flex align-items-center" href="" data-toggle="dropdown"
+                            <a class="dropdown-item d-flex align-items-center" href="../facturas/facturas.php" data-toggle="dropdown"
                                 data-i18n="Adquisiciones">
                                 <i data-feather='gift'></i><span data-i18n="Adquisiciones">Adquisiciones </span>
                             </a>
                         </li>
                         <li data-menu="">
-                            <a class="dropdown-item d-flex align-items-center" href="" data-toggle="dropdown"
+                            <a class="dropdown-item d-flex align-items-center" href="../campos/campos.php" data-toggle="dropdown"
                                 data-i18n="Mi Campo">
                                 <i data-feather='layers'></i><span data-i18n="Mi Campo">Mi Campo </span>
                             </a>

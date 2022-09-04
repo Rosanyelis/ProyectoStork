@@ -1,6 +1,18 @@
+<!-- Validacion de sesión va aqui  -->
+
+<!-- Fin de validacion de sesion -->
+<!-- Controlador de listado  -->
 <?php include '../../controladores/Bodega/ShowbodegaController.php'; ?>
-<?php include '../layouts/header.php'; ?>
-<!-- BEGIN: Content-->
+<!-- Fin de Controlador de listado  -->
+
+<?php include '../layouts/cabecera.php'; ?>
+<?php include '../layouts/estilos.php'; ?>
+
+<!-- Incluir estilos css en caso de ser necesario  -->
+
+<?php include '../layouts/fincabecera.php'; ?>
+<?php include '../layouts/body.php'; ?>
+<?php include '../layouts/navigation.php'; ?>
 
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -109,5 +121,10 @@
 </div>
 <!-- END: Content-->
 
-<?php include '../layouts/footer.php' ?>
+<?php include '../layouts/footer.php'; ?>
+<?php include '../layouts/scripts.php'; ?>   
+<!-- Incluir scripts en caso de ser necesario  -->
+
+<!-- Fin scripts en caso de ser necesario  -->
+<?php include '../layouts/finbody.php'; ?>   
 
