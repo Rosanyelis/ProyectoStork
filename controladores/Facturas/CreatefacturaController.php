@@ -17,8 +17,8 @@ $nro_factura        = rand(1, 10000000);
 $instacia = new Factura();
 $result = $instacia->create($rut, $proveedor, $direccion, $razon_social, $telefono, $monto_compra, $lotesProductos, $nro_factura);
 
-// echo $result;
-
+# Validamos el resultado y guardamos un dato en el localstorage
+# o memoria del navegador para generar el mensaje de creación exitosa
 if ($result == 1) {
     echo 
     "<script> 

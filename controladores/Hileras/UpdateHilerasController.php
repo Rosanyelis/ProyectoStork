@@ -13,12 +13,18 @@ $arbol_hilera  = trim($_REQUEST['arbol_hilera']);
 # Instaciamos la funcion de la clase campos para insertar datos
 $instacia = new Hileras();
 $result = $instacia->update($id, $idcc, $idhilera, $metro_hilera, $arbol_hilera);
-
-if ($result) {
+# valida el proceso de actualizacion 
+if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
         window.location='../../vistas/hileras/hileras.php?id=".$id."&idcc=".$idcc."'; 
+    </script>";
+}else{
+    echo 
+    "<script> 
+        localStorage.setItem('error', 'true');        
+        window.location='../../vistas/hileras/hileras.php?id=".$id."&idcc=".$idcc."';  
     </script>";
 }
 

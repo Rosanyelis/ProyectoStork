@@ -13,13 +13,20 @@ $promedio_cc    = strtoupper(trim($_REQUEST['promedio_cc']));
 # Instaciamos la funcion de la clase campos para insertar datos
 $instacia = new Campos();
 $result = $instacia->update($id, $nombre, $area_total, $cantidad_cc, $promedio_cc);
-
-if ($result) {
+# valida el proceso de actualizacion 
+if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
         window.location='../../vistas/campos/campos.php?id=".$id."'; 
     </script>";
+}else{
+    echo 
+    "<script> 
+        localStorage.setItem('error', 'true');        
+        window.location='../../vistas/campos/campos.php?id=".$id."';  
+    </script>";
 }
+
 
 

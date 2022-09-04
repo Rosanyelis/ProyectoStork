@@ -2,7 +2,7 @@
 
 require_once("../../modelos/CentroCostosModel.php");
 
-
+# Convertimos en mayusculas los datos recibidos en caso de ser texto
 # Eliminamos los espacios del principio y final del dato
 $id                 = trim($_REQUEST['id']);
 $idcc               = trim($_REQUEST['idcc']);
@@ -18,11 +18,17 @@ $nombre_combinacion = strtoupper(trim($_REQUEST['nombre_combinacion']));
 $instacia = new CentroCostos();
 $result = $instacia->update($id, $idcc, $nombre, $area_cc, $cantidad_hilera, $cantidad_calle, $nombre_especie, $nombre_variedad, $nombre_combinacion);
 
-if ($result) {
+if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
         window.location='../../vistas/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."'; 
+    </script>";
+}else{
+    echo 
+    "<script> 
+        localStorage.setItem('error', 'true');        
+        window.location='../../vistas/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."';  
     </script>";
 }
 
