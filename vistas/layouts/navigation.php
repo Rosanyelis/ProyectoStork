@@ -112,14 +112,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li data-menu="">
-                                    <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="dropdown"
+                                    <a class="dropdown-item d-flex align-items-center" href="../contratistas/contratista.php" data-toggle="dropdown"
                                         data-i18n="Contratistas">
                                         <i data-feather="circle"></i>
                                         <span data-i18n="Contratistas">Contratistas</span>
                                     </a>
                                 </li>
                                 <li data-menu="">
-                                    <a class="dropdown-item d-flex align-items-center" href="#" data-toggle="dropdown"
+                                    <a class="dropdown-item d-flex align-items-center" href="../colaborador/colaborador.php" data-toggle="dropdown"
                                         data-i18n="Colaboradores">
                                         <i data-feather="circle"></i>
                                         <span data-i18n="Colaboradores">Colaboradores</span>
@@ -136,13 +136,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li data-menu="">
-                            <a class="dropdown-item d-flex align-items-center" href="" data-toggle="dropdown"
+                            <a class="dropdown-item d-flex align-items-center" href="../orden-trabajo/orden-trabajo.php" data-toggle="dropdown"
                                 data-i18n="Orden de Trabajo">
                                 <i data-feather='briefcase'></i><span data-i18n="Orden de Trabajo">Orden de Trabajo </span>
                             </a>
                         </li>
                         <li data-menu="">
-                            <a class="dropdown-item d-flex align-items-center" href="" data-toggle="dropdown"
+                            <a class="dropdown-item d-flex align-items-center" href="../presupuesto/presupuesto.php" data-toggle="dropdown"
                                 data-i18n="Presupuesto">
                                 <i data-feather='dollar-sign'></i><span data-i18n="Presupuesto">Presupuesto </span>
                             </a>

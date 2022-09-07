@@ -21,95 +21,106 @@ class OrdenTrabajo
         }
     }
 
-    public function create($rut, $proveedor, $direccion, $razon_social, $telefono, $monto_compra, $lotesProductos, $numerorden)
+    public function create($nOT, $rut, $responsable, $nota, $estado_fen, $mojamiento, $VolMinBoq, $VeloSug, $Ef, $HilerasEst, $lotesProductos)
     {
         try {
             $d = new DateTime();
             $fecha = $d->format('Y-m-d');
 
-            # Instacio para crear proveedor si no existe y lo mismo con la factura
-            $FacturaProveedor = new OrdenCompra();
-            $proveedor = $FacturaProveedor->Proveedor($rut, $proveedor, $direccion, $razon_social, $telefono, $numerorden, $monto_compra);
-
-            # Obtenemos el ultimo id del dato insertado
-            $last = Conexion::conectar()->prepare("SELECT IDENT_CURRENT('ordenes') as id");
-            $last->execute();
-            $dato = $last->fetchObject();
-            $idOrden = $dato->id;
+            # creo una orden de trabajo
+            $data = Conexion::conectar()->prepare("INSERT INTO OrdenTrabajo(numOt, responsable, fecha, rut, nota, estado_fen, Mojamiento, VolMinBoq, VeloSug, Ef, HilerasEst) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $results = $data->execute([$nOT, $responsable, $fecha, $rut, $nota, $estado_fen, $mojamiento, $VolMinBoq, $VeloSug, $Ef, $HilerasEst]);
 
             # Decodificamos el array de productos
             $productos = json_decode($lotesProductos, True);
 
             foreach ($productos as $key) {
-                $codigo = $key['codigo'];
-                $producto = $key['producto'];
-                $medida = $key['medida'];
-                $stock = $key['stock'];
-                $cantidad = $key['cantidad'];
-                $precio = $key['precio'];
+                $descripcionProducto = $key['descripcionProducto'];
+                $unidad = $key['unidad'];
+                $disolucion = $key['disolucion'];
+                $totalProd = $key['totalProd'];
+                $dosis = $key['dosis'];
+                $saldoStock = $key['saldoStock'];
 
                 # Ahora creamos los lotes de productos
-                $lotes  = Conexion::conectar()->prepare("INSERT INTO lotes_compras (n_orden, codproducto, producto, cantidad, unidad, precioc, fecha_creacion) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $results = $lotes->execute([$idOrden, $codigo, $producto, $cantidad, $medida, $precio, $fecha]);
+                $lotes  = Conexion::conectar()->prepare("INSERT INTO LoteOrdenTrabajo (id_loteOrden, descripcionProducto, unidad, disolucion, totalProd, dosis, saldoStock) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $procesar = $lotes->execute([$nOT, $descripcionProducto, $unidad, $disolucion, $totalProd, $dosis, $saldoStock]);
 
+                $estado = 'asignacion';
+                $data = Conexion::conectar()->prepare("UPDATE Ejecucion SET estado = ? WHERE id_ejecucion = ? ");
+                $results = $data->execute([$estado, $nOT]);
             }
+            
             return $results;
+
         } catch (PDOException $e) {
             echo 'Error en el proceso de insercion';
             echo $e->getMessage();
         }
     }
 
-    public function show($id)
+    public function capturar($id)
     {
         try {
-            $ordenes = Conexion::conectar()->prepare("SELECT ordenes.*, proveedores.nombre, proveedores.direccion , proveedores.razon_social, proveedores.telefono FROM ordenes JOIN proveedores ON ordenes.rut_proveedor = proveedores.rut WHERE ordenes.n_orden = ?");
-            $ordenes->execute([$id]);
-            $data = $ordenes->fetchObject();
+            # Consultar orden de trabajo a capturar seleccionada
+            $consulta1 = Conexion::conectar()->prepare("SELECT * FROM Ejecucion WHERE id_ejecucion = ?");
+            $consulta1->execute([$id]);
+            $orden = $consulta1->fetchObject();
 
-            $lotesf = Conexion::conectar()->prepare("SELECT lotes_compras.*, productos.stock FROM lotes_compras JOIN productos ON lotes_compras.codproducto = productos.cod_producto WHERE lotes_compras.n_orden = ?");
-            $lotesf->execute([$id]);
-            $lotes = $lotesf->fetchAll(PDO::FETCH_OBJ);
+            # Obtener el centro de costo
+            $consulta2 = Conexion::conectar()->prepare("SELECT * FROM CentroCosto WHERE nombre = ?");
+            $consulta2->execute([$orden->centroCosto]);
+            $centrocosto = $consulta2->fetchObject();
+
+            # Obtener la labor
+            $consulta3 = Conexion::conectar()->prepare("SELECT * FROM Grupo_faena WHERE nombre_labor = ?");
+            $consulta3->execute([$orden->labor]);
+            $labor = $consulta3->fetchObject();
+
+            # Obtener area de aplicacion
+            $consulta4 = Conexion::conectar()->prepare("SELECT * FROM Area_apli WHERE CdSp = ?");
+            $consulta4->execute([$orden->lugarAplicacion]);
+            $areaAplicacion = $consulta4->fetchObject();
+
+            # Obtener Estados Fenealogicos
+            $consulta5 = Conexion::conectar()->prepare("SELECT * FROM Estadofeno");
+            $consulta5->execute();
+            $estadoFenealogico = $consulta5->fetchAll(PDO::FETCH_OBJ);
+
+            # Obtener maquinaria de orden
+            $consulta6 = Conexion::conectar()->prepare("SELECT * FROM HerramientaEjecucion WHERE id_ejecucion = ?");
+            $consulta6->execute([$id]);
+            $maquinaria = $consulta6->fetchAll(PDO::FETCH_OBJ);
+
+            # Obtener maquinaria de orden
+            $consulta7 = Conexion::conectar()->prepare("SELECT * FROM ProductoEjecucion WHERE id_ejecucion = ?");
+            $consulta7->execute([$id]);
+            $productosEje = $consulta7->fetchAll(PDO::FETCH_OBJ);
 
 
-            $results = compact('data', 'lotes');
+            $results = compact('orden', 'centrocosto', 'labor', 'areaAplicacion', 'estadoFenealogico', 'maquinaria', 'productosEje');
             return $results;
 
+
         } catch (PDOException $e) {
-            echo 'incapaz de recuperar datos';
+            echo 'Error en el proceso de insercion';
             echo $e->getMessage();
         }
     }
 
-    public function delete($id)
-    {
-        try {
-            $data = Conexion::conectar()->prepare("DELETE FROM ordenes WHERE n_orden = ?");
-            $results = $data->execute([$id]);
-            $dato = Conexion::conectar()->prepare("DELETE FROM lotes_compras WHERE n_orden = ?");
-            $dato->execute([$id]);
-            return $results;
-
-        } catch (PDOException $e) {
-            echo 'incapaz de recuperar datos';
-            echo $e->getMessage();
-        }
-    }
-
-    public function searchProveedor($rut)
+    public function searchItem($producto)
     {
         try {
             $datos['data'] = [];
-            $info = Conexion::conectar()->prepare("SELECT * FROM proveedores WHERE rut = ?");
-            $procesar = $info->execute([$rut]);
+            $info = Conexion::conectar()->prepare("SELECT * FROM item WHERE n_item = ?");
+            $procesar = $info->execute([$producto]);
             if ($procesar) {
                 while ($data = $info->fetch(PDO::FETCH_ASSOC)) {
                     $datos['data'] = [
-                        'rut' => $data['rut'],
-                        'nombre' => $data['nombre'],
-                        'direccion' => $data['direccion'],
-                        'razon_social' => $data['razon_social'],
-                        'telefono' => $data['telefono'],
+                        'descripcion' => $data['n_item'],
+                        'codItem' => $data['c_item'],
+                        'unidadItem' => $data['n_unidad'],
+                        'valor' => $data['ValorItem']
                     ];
                 }
            
@@ -122,58 +133,4 @@ class OrdenTrabajo
             echo $e->getMessage();
         }
     }
-
-    public function searchProducto($codigo)
-    {
-        try {
-            $datos['data'] = [];
-            $info = Conexion::conectar()->prepare("SELECT * FROM Productos WHERE cod_producto = ?");
-            $procesar = $info->execute([$codigo]);
-            if ($procesar) {
-                while ($data = $info->fetch(PDO::FETCH_ASSOC)) {
-                    $datos['data'] = [
-                        'codigo' => $data['cod_producto'],
-                        'producto' => $data['descripcion'],
-                        'medida' => $data['medida'],
-                        'familia' => $data['familia'],
-                        'subfamilia' => $data['sub_familia'],
-                        'tipo' => $data['tipo'],
-                        'stock' => $data['stock'],
-                    ];
-                }
-
-                $results = json_encode($datos);
-                echo $results;
-            }
-        } catch (PDOException $e) {
-            echo 'incapaz de recuperar datos';
-            echo $e->getMessage();
-        }
-    }
-    
-    public function Proveedor($rut, $proveedor, $direccion, $razon_social, $telefono, $numerorden, $monto_compra)
-    {
-        try {
-            $d = new DateTime();
-            $fecha = $d->format('Y-m-d');
-            # hacemos un count para saber si el Proveedor existe o no
-            $proveedor  = Conexion::conectar()->prepare("SELECT COUNT(*) FROM proveedores WHERE rut = ?");
-            $countp     = $proveedor->execute([$rut]);
-
-            # SI no existe lo registramos
-            if ($countp === 0) {
-                $proveedor  = Conexion::conectar()->prepare("INSERT INTO proveedores (rut, nombre, direccion, razon_social, telefono) VALUES (?, ?, ?, ?, ?)");
-                $countp     = $proveedor->execute([$rut, $proveedor, $direccion, $razon_social, $telefono]);
-            }
-
-            # Insertamos la factura
-            $factura  = Conexion::conectar()->prepare("INSERT INTO ordenes (numerorden, fecha, rut_proveedor, monto_compra, estatus) VALUES (?, ?, ?, ?, ?)");
-            $factura->execute([$numerorden, $fecha, $rut, $monto_compra, 'En Revisión']);
-
-        }catch (PDOException $e) {
-            echo 'incapaz de recuperar datos';
-            echo $e->getMessage();
-        }
-    }
-
 }

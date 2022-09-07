@@ -203,6 +203,135 @@
 <?php include '../layouts/footer.php'; ?>
 <?php include '../layouts/scripts.php'; ?>   
 <!-- Incluir scripts en caso de ser necesario  -->
+<script>
+$(window).on('load', function() {
+    'use strict';
 
+    var loteProductos = [];
+    /**
+     * Modulo de Factura - Crear Factura
+     */
+    $('#buscarproducto').on('click', function() {
+        let codproducto = $('#codproducto').val();
+        $.ajax({
+            type: 'POST',
+            url: '../../controladores/Facturas/SearchbodegaController.php',
+            data: {
+                codproducto
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.data != '') {
+                    $('#codigo').val(response.data.codigo);
+                    $('#producto').val(response.data.producto);
+                    $('#tipo').val(response.data.tipo);
+                    $('#familia').val(response.data.familia);
+                    $('#subfamilia').val(response.data.subfamilia);
+                    $('#medida').val(response.data.medida);
+                    $('#stock').val(response.data.stock);
+                }else{
+                    alert('El nombre de producto ingresado no existe, por favor ingrese un producto que exista');
+                    $('#codigo').val('');
+                    $('#producto').val('');
+                    $('#tipo').val('');
+                    $('#familia').val('');
+                    $('#subfamilia').val('');
+                    $('#medida').val('');
+                    $('#stock').val('');
+    
+                    $('#codigo').removeAttr('readonly');
+                    $('#producto').removeAttr('readonly');
+                    $('#tipo').removeAttr('readonly');
+                    $('#familia').removeAttr('readonly');
+                    $('#subfamilia').removeAttr('readonly');
+                    $('#medida').removeAttr('readonly');
+                }
+            }
+        });
+    });
+    $('#rut_proveedor').change(function() {
+        var rut = $('#rut_proveedor').val();
+        $.ajax({
+            type: 'POST',
+            url: '../../controladores/Facturas/SearchproveedorController.php',
+            data: {
+                rut: rut
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.data != '') {
+                    $('.msgproveedor').empty();
+                    $('#nombrep').val(response.data.nombre);
+                    $('#direccion').val(response.data.direccion);
+                    $('#razon_social').val(response.data.razon_social);
+                    $('#telefono').val(response.data.telefono);
+                }else{
+                    $('#proveedor').addClass('invalid was-validated');
+                    $('.invalid-feedback').empty();
+                    $('.invalid-feedback').append('El Rut de Proveedor que ingresó no existe!');
+                    alert('Si el rut no se encuentra registrado, se le habilitan los campos para un nuevo registro');
+                    $('#nombrep').removeAttr('readonly');;
+                    $('#direccion').removeAttr('readonly');;
+                    $('#razon_social').removeAttr('readonly');;
+                    $('#telefono').removeAttr('readonly');;
+                }
+            }
+        });
+    });
+
+    $('#aggLote').on('click', function() {
+
+        var codLote = $('#lote').val();
+        var codigo = $('#codigo').val();
+        var producto = $('#producto').val();
+        var tipo = $('#tipo').val();
+        var familia = $('#familia').val();
+        var subfamilia = $('#subfamilia').val();
+        var medida = $('#medida').val();            
+        var cantidad = $('#cantidad').val();
+        var precio = $('#precio').val();
+
+        let fila =
+            '<tr><td>' + codLote + '</td><td>' + codigo + '</td><td>' + producto + '</td><td>' +
+            tipo + '</td><td>' + familia + '</td><td>' + subfamilia + '</td><td>' + medida +
+            '</td><td>' + cantidad + '</td><td>' + precio +
+            '</td><td><button type="button" class="btn btn-danger">Eliminar</button></td></tr>'
+
+        var datosFila = {};
+        datosFila.lote = codLote;
+        datosFila.codigo = codigo;
+        datosFila.producto = producto;
+        datosFila.tipo = tipo;
+        datosFila.familia = familia;
+        datosFila.subfamilia = subfamilia;
+        datosFila.medida = medida
+        datosFila.cantidad = cantidad;
+        datosFila.precio = precio;
+
+
+        loteProductos.push(datosFila);
+        console.log(datosFila);
+
+        $('.lote-productos tbody').append(fila);
+
+        $('#codigo').val('');
+        $('#producto').val('');
+        $('#tipo').val('');
+        $('#familia').val('');
+        $('#subfamilia').val('');
+        $('#medida').val('');
+        $('#cantidad').val('');
+        $('#precio').val('');
+        $('#lote').val('');
+        console.log(loteProductos);
+    });
+    $('#enviar').on('click', function() {
+        let lote = JSON.stringify(loteProductos);
+        $('#productos').val(lote);
+        $('#aggfacturaform').submit();
+        
+    });
+});
+</script>
 <!-- Fin scripts en caso de ser necesario  -->
 <?php include '../layouts/finbody.php'; ?> 
