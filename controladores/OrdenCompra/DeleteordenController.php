@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../modelos/OrdenCompraModel.php");
+require_once("../../../modelos/OrdenCompraModel.php");
 
 # Eliminamos los espacios del principio y final del dato
 $id   = trim($_REQUEST['id']);
@@ -12,6 +12,6 @@ if ($result) {
     echo 
     "<script> 
         localStorage.setItem('delete', 'true');        
-        window.location='../../vistas/ordencompra/ordendecompra.php'; 
+        window.location='../../vistas/admin/ordencompra/ordendecompra.php'; 
     </script>";
 }

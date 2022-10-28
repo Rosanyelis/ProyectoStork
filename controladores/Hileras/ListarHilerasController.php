@@ -1,7 +1,7 @@
 <?php
 # Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
-require_once("../../modelos/HilerasModel.php");
+require_once("../../../modelos/HilerasModel.php");
 
 # Eliminamos los espacios del principio y final del dato
 $id            = trim($_REQUEST['id']);

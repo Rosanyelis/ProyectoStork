@@ -18,13 +18,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
-        window.location='../../vistas/calles/calles.php?id=".$id."&idcc=".$idcc."'; 
+        window.location='../../vistas/admin/calles/calles.php?id=".$id."&idcc=".$idcc."'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/calles/calles.php?id=".$id."&idcc=".$idcc."'; 
+        window.location='../../vistas/admin/calles/calles.php?id=".$id."&idcc=".$idcc."'; 
     </script>";
 }
 

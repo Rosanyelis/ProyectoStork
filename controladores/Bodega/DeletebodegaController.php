@@ -12,6 +12,6 @@ if ($result) {
     echo 
     "<script> 
         localStorage.setItem('delete', 'true');        
-        window.location='../../vistas/bodega/bodega.php'; 
+        window.location='../../vistas/admin/bodega/bodega.php'; 
     </script>";
 }

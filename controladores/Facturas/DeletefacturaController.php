@@ -12,12 +12,12 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('delete', 'true');        
-        window.location='../../vistas/facturas/facturas.php'; 
+        window.location='../../vistas/admin/facturas/facturas.php'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/facturas/facturas.php'; 
+        window.location='../../vistas/admin/facturas/facturas.php'; 
     </script>";
 }

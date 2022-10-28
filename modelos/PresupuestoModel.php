@@ -41,12 +41,12 @@ class Prespuesto
             $presupuesto = $data->fetchObject();
 
             # Obtener maquinaria de orden
-            $consulta6 = Conexion::conectar()->prepare("SELECT * FROM HerramientaEjecucion WHERE id_ejecucion = ?");
+            $consulta6 = Conexion::conectar()->prepare("SELECT * FROM HerramientaPresupuesto WHERE id_presupuesto = ?");
             $consulta6->execute([$id]);
             $maquinaria = $consulta6->fetchAll(PDO::FETCH_OBJ);
 
             # Obtener maquinaria de orden
-            $consulta7 = Conexion::conectar()->prepare("SELECT * FROM ProductoEjecucion WHERE id_ejecucion = ?");
+            $consulta7 = Conexion::conectar()->prepare("SELECT * FROM ProductoPresupuesto WHERE id_presupuesto = ?");
             $consulta7->execute([$id]);
             $productosEje = $consulta7->fetchAll(PDO::FETCH_OBJ);
 

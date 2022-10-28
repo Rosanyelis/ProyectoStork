@@ -23,7 +23,7 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('registry', 'true');        
-        window.location='../../vistas/ordencompra/ordendecompra.php'; 
+        window.location='../../vistas/admin/ordencompra/ordendecompra.php'; 
     </script>";
 }
 

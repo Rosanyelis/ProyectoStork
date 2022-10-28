@@ -22,13 +22,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('registry', 'true');        
-        window.location='../../vistas/centrocostos/centrocostos.php?id=".$campoid."'; 
+        window.location='../../vistas/admin/centrocostos/centrocostos.php?id=".$campoid."'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/centrocostos/centrocostos.php?id=".$campoid."';  
+        window.location='../../vistas/admin/centrocostos/centrocostos.php?id=".$campoid."';  
     </script>";
 }
 

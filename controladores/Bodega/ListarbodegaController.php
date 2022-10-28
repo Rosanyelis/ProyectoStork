@@ -1,7 +1,7 @@
 <?php
 # Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
-require_once("../../modelos/BodegaModel.php");
+require_once("../../../modelos/BodegaModel.php");
 
 # Instancio la funcion listar
 $instacia = new Bodega();

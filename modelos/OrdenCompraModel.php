@@ -66,7 +66,7 @@ class OrdenCompra
             $ordenes->execute([$id]);
             $data = $ordenes->fetchObject();
 
-            $lotesf = Conexion::conectar()->prepare("SELECT lotes_compras.*, productos.stock FROM lotes_compras JOIN productos ON lotes_compras.codproducto = productos.cod_producto WHERE lotes_compras.n_orden = ?");
+            $lotesf = Conexion::conectar()->prepare("SELECT lotes_compras.*, item.cantidad as stock FROM lotes_compras JOIN item ON lotes_compras.codproducto = item.c_item WHERE lotes_compras.n_orden = ?");
             $lotesf->execute([$id]);
             $lotes = $lotesf->fetchAll(PDO::FETCH_OBJ);
 
@@ -126,18 +126,18 @@ class OrdenCompra
     {
         try {
             $datos['data'] = [];
-            $info = Conexion::conectar()->prepare("SELECT * FROM Productos WHERE cod_producto = ?");
+            $info = Conexion::conectar()->prepare("SELECT * FROM item WHERE c_item = ?");
             $procesar = $info->execute([$codigo]);
             if ($procesar) {
                 while ($data = $info->fetch(PDO::FETCH_ASSOC)) {
                     $datos['data'] = [
-                        'codigo' => $data['cod_producto'],
-                        'producto' => $data['descripcion'],
-                        'medida' => $data['medida'],
-                        'familia' => $data['familia'],
-                        'subfamilia' => $data['sub_familia'],
-                        'tipo' => $data['tipo'],
-                        'stock' => $data['stock'],
+                        'codigo' => $data['c_item'],
+                        'producto' => $data['n_item'],
+                        'medida' => $data['n_unidad'],
+                        'familia' => $data['n_familia'],
+                        'subfamilia' => $data['n_subfamilia'],
+                        'tipo' => $data['area_item'],
+                        'stock' => $data['cantidad'],
                     ];
                 }
 

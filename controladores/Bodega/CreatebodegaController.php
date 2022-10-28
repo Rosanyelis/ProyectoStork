@@ -28,13 +28,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('registry', 'true');        
-        window.location='../../vistas/bodega/bodega.php'; 
+        window.location='../../vistas/admin/bodega/bodega.php'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/bodega/bodega.php'; 
+        window.location='../../vistas/admin/bodega/bodega.php'; 
     </script>";
 }
 

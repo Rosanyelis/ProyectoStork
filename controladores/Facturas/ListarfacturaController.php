@@ -2,7 +2,7 @@
 
 # Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
-require_once("../../modelos/FacturaModel.php");
+require_once("../../../modelos/FacturaModel.php");
 
 # Instancio la funcion listar
 $instacia = new Factura();

@@ -1,7 +1,7 @@
 <?php
 # Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
-require_once("../../modelos/CamposModel.php");
+require_once("../../../modelos/CamposModel.php");
 
 # Instancio la funcion listar
 $instacia = new Campos();

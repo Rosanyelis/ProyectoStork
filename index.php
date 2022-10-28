@@ -59,10 +59,10 @@
                                 <a href="javascript:void(0);" class="brand-logo">
                                     <h2 class="brand-text text-primary">STORK</h2>
                                 </a>
-                                <form class="auth-login-form mt-2" action="vistas/dashboard/dashboard.php" method="POST">
+                                <form class="auth-login-form mt-2" action="controladores/sessionController.php" method="POST">
                                     <div class="form-group">
-                                        <label for="login-email" class="form-label">Correo o Usuario</label>
-                                        <input type="text" class="form-control" id="login-email" name="EmailOrUser" placeholder="john@example.com" aria-describedby="login-email" tabindex="1" autofocus />
+                                        <label for="login-email" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="login-email" name="user" placeholder="john@example.com" aria-describedby="login-email" tabindex="1" autofocus />
                                     </div>
 
                                     <div class="form-group">

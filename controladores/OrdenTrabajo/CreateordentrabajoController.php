@@ -26,12 +26,12 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('registry', 'true');        
-        window.location='../../vistas/orden-trabajo/orden-trabajo.php'; 
+        window.location='../../vistas/admin/orden-trabajo/orden-trabajo.php'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/orden-trabajo/orden-trabajo.php'; 
+        window.location='../../vistas/admin/orden-trabajo/orden-trabajo.php'; 
     </script>";
 }

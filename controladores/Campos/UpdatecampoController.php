@@ -18,13 +18,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
-        window.location='../../vistas/campos/campos.php?id=".$id."'; 
+        window.location='../../vistas/admin/campos/campos.php?id=".$id."'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/campos/campos.php?id=".$id."';  
+        window.location='../../vistas/admin/campos/campos.php?id=".$id."';  
     </script>";
 }
 

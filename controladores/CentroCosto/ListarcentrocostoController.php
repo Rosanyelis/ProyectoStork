@@ -1,7 +1,7 @@
 <?php
 # Realizo la llamada del modelo para instanciar la funcion 
 # correspondiente de listado
-require_once("../../modelos/CentroCostosModel.php");
+require_once("../../../modelos/CentroCostosModel.php");
 
 # Obtenemos el id de la url
 $id         = $_REQUEST['id'];

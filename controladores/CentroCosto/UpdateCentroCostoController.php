@@ -22,13 +22,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
-        window.location='../../vistas/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."'; 
+        window.location='../../vistas/admin/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."';  
+        window.location='../../vistas/admin/centrocostos/centrocostos.php?id=".$id."&idcc=".$idcc."';  
     </script>";
 }
 

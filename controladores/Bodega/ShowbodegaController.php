@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../modelos/BodegaModel.php");
+require_once("../../../modelos/BodegaModel.php");
 
 # Eliminamos los espacios del principio y final del dato
 $id   = trim($_REQUEST['id']);

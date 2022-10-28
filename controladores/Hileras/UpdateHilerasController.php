@@ -18,13 +18,13 @@ if ($result == 1) {
     echo 
     "<script> 
         localStorage.setItem('update', 'true');        
-        window.location='../../vistas/hileras/hileras.php?id=".$id."&idcc=".$idcc."'; 
+        window.location='../../vistas/admin/hileras/hileras.php?id=".$id."&idcc=".$idcc."'; 
     </script>";
 }else{
     echo 
     "<script> 
         localStorage.setItem('error', 'true');        
-        window.location='../../vistas/hileras/hileras.php?id=".$id."&idcc=".$idcc."';  
+        window.location='../../vistas/admin/hileras/hileras.php?id=".$id."&idcc=".$idcc."';  
     </script>";
 }
 

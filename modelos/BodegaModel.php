@@ -9,7 +9,7 @@ class Bodega
     public function listar()
     {
         try {
-            $data = Conexion::conectar()->prepare("SELECT * FROM Productos");
+            $data = Conexion::conectar()->prepare("SELECT * FROM item");
             $data->execute();
             $results = $data->fetchAll(PDO::FETCH_OBJ);
 
@@ -39,7 +39,7 @@ class Bodega
     public function show($id)
     {
         try {
-            $campo = Conexion::conectar()->prepare("SELECT * FROM Productos WHERE n_producto = ?");
+            $campo = Conexion::conectar()->prepare("SELECT * FROM item WHERE c_item = ?");
             $campo->execute([$id]);
             $data = $campo->fetchObject();
 
@@ -55,7 +55,7 @@ class Bodega
     public function edit($id)
     {
         try {
-            $data = Conexion::conectar()->prepare("SELECT * FROM Productos WHERE n_producto = ?");
+            $data = Conexion::conectar()->prepare("SELECT * FROM item WHERE c_item = ?");
             $data->execute([$id]);
             $results = $data->fetchObject();
 
@@ -83,7 +83,7 @@ class Bodega
     public function delete($id)
     {
         try {
-            $data = Conexion::conectar()->prepare("DELETE FROM Productos WHERE n_producto = ?");
+            $data = Conexion::conectar()->prepare("DELETE FROM item WHERE c_item = ?");
             $results = $data->execute([$id]);
             return $results;
 

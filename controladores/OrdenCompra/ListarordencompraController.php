@@ -1,7 +1,7 @@
 <?php
 
 
-require_once("../../modelos/OrdenCompraModel.php");
+require_once("../../../modelos/OrdenCompraModel.php");
 
 
 $instacia = new OrdenCompra();
