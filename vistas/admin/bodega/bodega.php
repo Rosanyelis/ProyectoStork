@@ -103,7 +103,7 @@
                                             <th>Producto</th>
                                             <th>Medida</th>
                                             <th>Stock</th>
-                                            <th width="30px">Accciones</th>
+                                            <th width="30px">Acciones</th>
                                         </tr>
                                     </tfoot>
                                 </table>

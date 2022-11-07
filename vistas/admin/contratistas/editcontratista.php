@@ -3,6 +3,8 @@
 <!-- Fin de validacion de sesion -->
 <!-- Controlador de listado  -->
 <?php include '../../../controladores/Contratistas/SelectcampotratoController.php' ?>
+<?php include '../../../controladores/Contratistas/EditContratistaController.php' ?>
+
 <!-- Fin de Controlador de listado  -->
 
 <?php include '../../layouts/cabecera.php'; ?>
@@ -38,33 +40,37 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Nuevo Contratista</h4>
+                            <h4 class="card-title">Editar Contratista</h4>
                         </div>
                         <div class="card-body">
-                            <form class="form" action="../../../controladores/Contratistas/CreateContratistaController.php" method="POST">
+                            <form class="form" action="../../../controladores/Contratistas/UpdateContratistaController.php?id=<?php echo $id; ?>" method="POST">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="rut_entidad">Rut</label>
-                                            <input type="text" id="rut_entidad" class="form-control" placeholder="Ejem: 123456789-9" name="rut_entidad">
+                                            <input type="text" id="rut_entidad" class="form-control" value="<?php echo $data['data']->Rut_Entidad; ?>"
+                                            placeholder="Ejem: 123456789-9" name="rut_entidad">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="Nombre_Entidad">Nombre Entidad</label>
-                                            <input type="text" id="Nombre_Entidad" class="form-control" placeholder="ejemplo: El Pacífico" name="Nombre_Entidad">
+                                            <input type="text" id="Nombre_Entidad" class="form-control" value="<?php echo $data['data']->Nombre_Entidad; ?>"
+                                            placeholder="ejemplo: El Pacífico" name="Nombre_Entidad">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="direccion">Dirección</label>
-                                            <input type="text" id="direccion" class="form-control" placeholder="Ejem: Quilicura" name="direccion">
+                                            <input type="text" id="direccion" class="form-control" value="<?php echo $data['data']->Direccion; ?>"
+                                            placeholder="Ejem: Quilicura" name="direccion">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="giro">Giro</label>
-                                            <input type="text" id="giro" class="form-control" name="giro" placeholder="Ejem: Explotación Agrícola">
+                                            <input type="text" id="giro" class="form-control" name="giro" value="<?php echo $data['data']->Giro; ?>"
+                                            placeholder="Ejem: Explotación Agrícola">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -73,7 +79,7 @@
                                             <select class="form-control" id="campo" name="sucursal">
                                                 <option value="">---Seleccione Campo ---</option>
                                                 <?php foreach ($data['campos'] as $item) { ?>
-                                                <option value="<?php echo $item->nombre ?>"><?php echo $item->nombre ?></option>
+                                                <option value="<?php echo $item->nombre ?>" <?php if ($item->nombre == $data['data']->Sucursal) {echo 'selected';} ?> ><?php echo $item->nombre ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -84,7 +90,7 @@
                                             <select class="form-control" id="trato" name="trato">
                                                 <option value="">---Seleccione Tipo de Trato---</option>
                                                 <?php foreach ($data['tratos'] as $item) { ?>
-                                                <option value="<?php echo $item->Trato ?>"><?php echo $item->Trato ?></option>
+                                                <option value="<?php echo $item->Trato ?>" <?php if ($item->Trato == $data['data']->trato) {echo 'selected';} ?> ><?php echo $item->Trato ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -92,11 +98,11 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="valor">Valor($) de Trato</label>
-                                            <input type="text" id="valor" class="form-control" name="valor" readonly placeholder="0">
+                                            <input type="text" id="valor" class="form-control" name="valor" value="<?php echo $data['data']->valor; ?>" readonly placeholder="0">
                                         </div>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <button type="submit" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Guardar</button>
+                                        <button type="submit" class="btn btn-primary mr-1 waves-effect waves-float waves-light">Actualizar</button>
                                         <button type="reset" class="btn btn-outline-secondary waves-effect">Limpiar</button>
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@
 <?php include '../../../controladores/validarSesionController.php' ?>
 <!-- Fin de validacion de sesion -->
 <!-- Controlador de listado  -->
+<?php include '../../../controladores/Colaborador/ListColaboradoresController.php' ?>
 <!--  -->
 <!-- Fin de Controlador de listado  -->
 
@@ -42,63 +43,54 @@
                         <div class="card-header border-bottom">
                             <h4 class="card-title">Listado de Colaboradores</h4>
                             <div class="text-right">
-                                <a href="createcontratista.php" class="btn btn-primary" type="button"><span><i data-feather='plus'></i>Nuevo Colaborador</span></a>
+                                <a href="createcolaborador.php" class="btn btn-primary" type="button"><span><i data-feather='plus'></i>Nuevo Colaborador</span></a>
                             </div>
                         </div>
                         <div class="card-datatable">
                             <table class="dt-responsive table">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
                                         <th>Rut</th>
-                                        <th>Jornada</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Labor</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <?php foreach ($data as $item) { ?>
+                                    <?php foreach ($data as $item) { ?>
                                         <tr>
-                                            <td><?php echo $item->id_Campo ?></td>
-                                            <td><?php echo $item->nombre ?></td>
-                                            <td><?php echo $item->area_total ?></td>
-                                            <td><?php echo $item->cantidad_cc ?></td>
-                                            <td><?php echo $item->promedio_cc ?></td>
+                                            <td><?php echo $item->r_trabajador ?></td>
+                                            <td><?php echo $item->n_trabajador ?></td>
+                                            <td><?php echo $item->n_labor_vigencia ?></td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-dark btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
                                                     Acciones
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="showcampo.php?id=<?php echo $item->id_Campo ?>">
+                                                        <a class="dropdown-item" href="showcolaborador.php?id=<?php echo $item->id ?>">
                                                         <i data-feather="eye"></i>
                                                             <span>Ver</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="editcampos.php?id=<?php echo $item->id_Campo ?>">
+                                                        <a class="dropdown-item" href="editcolaborador.php?id=<?php echo $item->id ?>">
                                                             <i data-feather="edit-2"></i>
                                                             <span>Editar</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                        <a class="dropdown-item" href="../../../controladores/Colaborador/DeleteColaboradorController.php?id=<?php echo $item->id ?>">
                                                             <i data-feather="trash-2"></i>
                                                             <span>Eliminar</span>
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="../centrocostos/centrocostos.php?id=<?php echo $item->id_Campo ?>">
-                                                            <i data-feather="plus"></i>
-                                                            <span>Centro de Costos</span>
                                                         </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?php } ?> -->
+                                        <?php } ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
                                         <th>Rut</th>
-                                        <th>Jornada</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Labor</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>

@@ -8,4 +8,4 @@
     <meta name="description" content="Gestión administrativa de trabajos en el campo, entre otros.">
     <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Gestión Administrativa STORK</title>
+    <title>Gestión Administrativa STORCK</title>

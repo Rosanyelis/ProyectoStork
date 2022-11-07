@@ -2,6 +2,7 @@
 <?php include '../../../controladores/validarSesionController.php' ?>
 <!-- Fin de validacion de sesion -->
 <!-- Controlador de listado  -->
+<?php include '../../../controladores/Contratistas/ListContratistasController.php' ?>
 <!--  -->
 <!-- Fin de Controlador de listado  -->
 
@@ -49,34 +50,37 @@
                             <table class="dt-responsive table">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
                                         <th>Razon Social</th>
                                         <th>Rut</th>
                                         <th>Giro</th>
                                         <th>Direccion</th>
-                                        <th>Telefono</th>
+                                        <th>Campo</th>
+                                        <!-- <th>Trato</th>
+                                        <th>Valor</th> -->
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <?php foreach ($data as $item) { ?>
+                                    <?php foreach ($data as $item) { ?>
                                         <tr>
-                                            <td><?php echo $item->id_Campo ?></td>
-                                            <td><?php echo $item->nombre ?></td>
-                                            <td><?php echo $item->area_total ?></td>
-                                            <td><?php echo $item->cantidad_cc ?></td>
-                                            <td><?php echo $item->promedio_cc ?></td>
+                                            <td><?php echo $item->Nombre_Entidad ?></td>
+                                            <td><?php echo $item->Rut_Entidad ?></td>
+                                            <td><?php echo $item->Giro ?></td>
+                                            <td><?php echo $item->Direccion ?></td>
+                                            <td><?php echo $item->Sucursal ?></td>
+                                            <!-- <td><?php echo $item->trato ?></td>
+                                            <td><?php echo $item->valor ?></td> -->
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-dark btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
                                                     Acciones
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="showcampo.php?id=<?php echo $item->id_Campo ?>">
+                                                        <a class="dropdown-item" href="showcontratista.php?id=<?php echo $item->Id ?>">
                                                         <i data-feather="eye"></i>
                                                             <span>Ver</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="editcampos.php?id=<?php echo $item->id_Campo ?>">
+                                                        <a class="dropdown-item" href="editcontratista.php?id=<?php echo $item->Id ?>">
                                                             <i data-feather="edit-2"></i>
                                                             <span>Editar</span>
                                                         </a>
@@ -84,25 +88,21 @@
                                                             <i data-feather="trash-2"></i>
                                                             <span>Eliminar</span>
                                                         </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="../centrocostos/centrocostos.php?id=<?php echo $item->id_Campo ?>">
-                                                            <i data-feather="plus"></i>
-                                                            <span>Centro de Costos</span>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <?php } ?> -->
+                                        <?php } ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Nombre</th>
                                         <th>Razon Social</th>
                                         <th>Rut</th>
                                         <th>Giro</th>
                                         <th>Direccion</th>
-                                        <th>Telefono</th>
+                                        <th>Campo</th>
+                                        <!-- <th>Trato</th>
+                                        <th>Valor</th> -->
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>

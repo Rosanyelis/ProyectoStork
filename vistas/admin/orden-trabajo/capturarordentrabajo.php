@@ -302,17 +302,20 @@
                                             <option value="Completa">Completa</option>
                                             <option value="Parcial">Parcial</option>
                                         </select>
-                                        <input type="hidden" name="cant_h" id="cant_h">
                                     </div>
                                 </div> 
                                 <div class="col-md-4" id="divHorario">
                                     <div class="form-group">
                                         <label for="validationServer01">Horario</label>
-                                        <select class="form-control" id="horario_parcial">
-                                            <option>Seleccione Horario</option>
-                                            <option value="8:00 AM a 12:00 PM">8:00 AM a 12:00 PM</option>
-                                            <option value="2:00 PM a 6:00 PM">2:00 PM a 6:00 PM</option>
-                                        </select>
+                                        <input type="text" id="horario_parcial" name="horario_parcial" class="form-control"
+                                        placeholder="8:00 AM a 12:00 PM">
+                                    </div>
+                                </div>
+                                <div class="col-md-4" id="divCantHora">
+                                    <div class="form-group">
+                                        <label for="validationServer01">Total de Horas</label>
+                                        <input type="text" id="cant_h" name="cant_h" class="form-control"
+                                        placeholder="4">
                                     </div>
                                 </div>  
                                 <div class="col-md-4">
@@ -551,11 +554,11 @@ $(window).on('load', function() {
         var jornada = $('#tipo_jornada').val();
         if (jornada == 'Completa') {
             $('#divHorario').hide();
-            $('#cant_h').val('10');
+            $('#divCantHora').show();
         }
         if (jornada == 'Parcial' ) {
             $('#divHorario').show();
-            $('#cant_h').val('5');
+            $('#divCantHora').show();
         }
     });   
 
